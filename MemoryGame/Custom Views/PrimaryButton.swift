@@ -60,6 +60,8 @@ class PrimaryButton: UIButton {
     }
     
     
+    // MARK: Delegate Callback
+    
     @objc private func buttonTap() {
         delegate?.handlePrimaryBUttonTap(sender: self)
     }

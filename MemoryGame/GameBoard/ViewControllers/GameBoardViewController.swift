@@ -13,8 +13,7 @@ class GameBoardViewController: UIViewController {
     // MARK: Variables
     
     var gameBoardSize: (Int, Int)?
-    lazy var backButtonImageView: UIImageView = UIImageView(frame: CGRect(x: 20, y: 20, width: 60, height: 60))
-    
+    var cardTypeArray: [String] = []
     
     // MARK: Outlets
     
@@ -45,28 +44,16 @@ class GameBoardViewController: UIViewController {
     private func setupBackButton() {
         navigationItem.setHidesBackButton(true, animated:false)
         
-        if let imgBackArrow = UIImage(named: "backNavButton") {
-            backButtonImageView.image = imgBackArrow
-        }
-        
-        backButtonImageView.alpha = 0.0
-        
-        let backTap = UITapGestureRecognizer(target: self, action: #selector(backToMain))
-        backButtonImageView.isUserInteractionEnabled = true
-        backButtonImageView.addGestureRecognizer(backTap)
-        navigationController?.view.addSubview(backButtonImageView)
+        let backArrowImageView = BackArrow(frame: CGRect(x: 20, y: 20, width: 60, height: 60))
+        backArrowImageView.delegate = self
+        backArrowImageView.alpha = 0.0
+        navigationController?.view.addSubview(backArrowImageView)
         
         UIView.animate(withDuration: 0.8) {
-            self.backButtonImageView.alpha = 1.0
+            backArrowImageView.alpha = 1.0
         }
         
     }
-    
-    @objc func backToMain() {
-        backButtonImageView.removeFromSuperview()
-        navigationController?.popViewController(animated: true)
-    }
-    
 
     private func presentError() {
         let alert = UIAlertController(title: "Sorry", message: "Something went wrong", preferredStyle: .alert)
@@ -76,4 +63,12 @@ class GameBoardViewController: UIViewController {
 
 }
 
+extension GameBoardViewController: BackArrowTap {
+    
+    func handleBackArrowTap(sender: UIImageView) {
+        sender.removeFromSuperview()
+        navigationController?.popViewController(animated: true)
+    }
+    
+}
 

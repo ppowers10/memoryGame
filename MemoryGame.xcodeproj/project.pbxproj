@@ -15,6 +15,7 @@
 		C00841CB226687CB005F392C /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00841CA226687CB005F392C /* LobbyViewController.swift */; };
 		C00841D22266BBE9005F392C /* GameBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00841D12266BBE9005F392C /* GameBoardViewController.swift */; };
 		C08288442266CA01000D3972 /* UINavigationController+Clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08288432266CA01000D3972 /* UINavigationController+Clear.swift */; };
+		C08288462266D21C000D3972 /* BackArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08288452266D21C000D3972 /* BackArrow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		C00841CA226687CB005F392C /* LobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
 		C00841D12266BBE9005F392C /* GameBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardViewController.swift; sourceTree = "<group>"; };
 		C08288432266CA01000D3972 /* UINavigationController+Clear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Clear.swift"; sourceTree = "<group>"; };
+		C08288452266D21C000D3972 /* BackArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackArrow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				C00841C8226683E9005F392C /* PrimaryButton.swift */,
+				C08288452266D21C000D3972 /* BackArrow.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C08288462266D21C000D3972 /* BackArrow.swift in Sources */,
 				C08288442266CA01000D3972 /* UINavigationController+Clear.swift in Sources */,
 				C00841C9226683E9005F392C /* PrimaryButton.swift in Sources */,
 				C00841D22266BBE9005F392C /* GameBoardViewController.swift in Sources */,
