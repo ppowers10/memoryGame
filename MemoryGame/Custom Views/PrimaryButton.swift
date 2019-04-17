@@ -8,11 +8,18 @@
 
 import UIKit
 
+protocol PrimaryButtonTap {
+    func handlePrimaryBUttonTap(sender: UIButton)
+}
+
 class PrimaryButton: UIButton {
   
+    // MARK: Variables
+    
     var borderWidth: CGFloat = 1.0
     var borderColor: CGColor = UIColor.black.cgColor
     var buttonCornerRadius: CGFloat = 10.0
+    var delegate: PrimaryButtonTap?
     
     var buttonTitle: String? {
         didSet {
@@ -22,6 +29,9 @@ class PrimaryButton: UIButton {
         }
     }
 
+    
+    // MARK: Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -36,12 +46,22 @@ class PrimaryButton: UIButton {
         setup()
     }
 
+    
+    // MARK: UI Setup
+    
     private func setup() {
         layer.borderWidth = borderWidth
         layer.borderColor = borderColor
         layer.cornerRadius = buttonCornerRadius
         clipsToBounds = true
         super.layoutSubviews()
+        
+        addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
+    }
+    
+    
+    @objc private func buttonTap() {
+        delegate?.handlePrimaryBUttonTap(sender: self)
     }
 
 }

@@ -42,6 +42,7 @@ class LobbyViewController: UIViewController {
     private func setupButtons() {
         for (index, gameOption) in gameOptions.enumerated() {
             let gameOptionButton = PrimaryButton(frame: CGRect(x: 0, y: 0, width: 150, height: 200))
+            gameOptionButton.delegate = self
             let (x, y) = gameOption
             gameOptionButton.buttonTitle = "\(x) x \(y)"
             gameOptionButton.tag = index
@@ -49,4 +50,10 @@ class LobbyViewController: UIViewController {
         }
     }
 
+}
+
+extension LobbyViewController: PrimaryButtonTap {
+    func handlePrimaryBUttonTap(sender: UIButton) {
+        print("Button with tag \(sender.tag) tapped")
+    }
 }
