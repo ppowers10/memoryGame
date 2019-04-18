@@ -14,7 +14,8 @@ class GameBoardViewController: UIViewController {
     
     var gameBoardSize: (Int, Int)?
     var cardTypeArray: [String] = []
-    let possibleCards = ["memoryBatCardFront", "memoryCatCardFront", "memoryCowCardFront", "memoryDragonFront", "memoryGarbageManCardFront", "memoryGhostDogCardFront", "memoryHenCardFront", "memoryHorseCardFront", "memoryPigCardFront", "memorySpiderCardFront"]
+    let possibleCards: Set<String> = ["memoryBatCardFront", "memoryCatCardFront", "memoryCowCardFront", "memoryDragonFront", "memoryGarbageManCardFront", "memoryGhostDogCardFront", "memoryHenCardFront", "memoryHorseCardFront", "memoryPigCardFront", "memorySpiderCardFront"]
+    var gameCards: [String] = []
     
     // MARK: Outlets
     
@@ -28,6 +29,7 @@ class GameBoardViewController: UIViewController {
         setupLabels()
         setupBackButton()
         setupGrid()
+        generateCards()
     }
     
 
@@ -92,6 +94,23 @@ class GameBoardViewController: UIViewController {
         let alert = UIAlertController(title: "Sorry", message: "Something went wrong", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Darn", style: .cancel, handler: nil))
         present(alert, animated: true)
+    }
+    
+    
+    // MARK: Game Logic
+    
+    private func generateCards() {
+        guard let gameBoardSize = gameBoardSize else { return }
+        let cardPairsNeeded = (gameBoardSize.0 * gameBoardSize.1) / 2
+        var copyPossibleCards = possibleCards
+        for _ in 1...cardPairsNeeded {
+            if let cardImage = copyPossibleCards.randomElement() {
+                gameCards.append(cardImage)
+                gameCards.append(cardImage)
+                copyPossibleCards.remove(cardImage)
+            }
+        }
+        gameCards.shuffle()
     }
 
 }
