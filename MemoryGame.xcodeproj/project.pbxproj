@@ -16,6 +16,7 @@
 		C00841D22266BBE9005F392C /* GameBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00841D12266BBE9005F392C /* GameBoardViewController.swift */; };
 		C08288442266CA01000D3972 /* UINavigationController+Clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08288432266CA01000D3972 /* UINavigationController+Clear.swift */; };
 		C08288462266D21C000D3972 /* BackArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08288452266D21C000D3972 /* BackArrow.swift */; };
+		C08288482267F958000D3972 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08288472267F958000D3972 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		C00841D12266BBE9005F392C /* GameBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardViewController.swift; sourceTree = "<group>"; };
 		C08288432266CA01000D3972 /* UINavigationController+Clear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Clear.swift"; sourceTree = "<group>"; };
 		C08288452266D21C000D3972 /* BackArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackArrow.swift; sourceTree = "<group>"; };
+		C08288472267F958000D3972 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			children = (
 				C00841C8226683E9005F392C /* PrimaryButton.swift */,
 				C08288452266D21C000D3972 /* BackArrow.swift */,
+				C08288472267F958000D3972 /* Card.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 			files = (
 				C08288462266D21C000D3972 /* BackArrow.swift in Sources */,
 				C08288442266CA01000D3972 /* UINavigationController+Clear.swift in Sources */,
+				C08288482267F958000D3972 /* Card.swift in Sources */,
 				C00841C9226683E9005F392C /* PrimaryButton.swift in Sources */,
 				C00841D22266BBE9005F392C /* GameBoardViewController.swift in Sources */,
 				C00841B622667C21005F392C /* AppDelegate.swift in Sources */,

@@ -14,6 +14,7 @@ class GameBoardViewController: UIViewController {
     
     var gameBoardSize: (Int, Int)?
     var cardTypeArray: [String] = []
+    let possibleCards = ["memoryBatCardFront", "memoryCatCardFront", "memoryCowCardFront", "memoryDragonFront", "memoryGarbageManCardFront", "memoryGhostDogCardFront", "memoryHenCardFront", "memoryHorseCardFront", "memoryPigCardFront", "memorySpiderCardFront"]
     
     // MARK: Outlets
     
@@ -26,6 +27,7 @@ class GameBoardViewController: UIViewController {
         super.viewDidLoad()
         setupLabels()
         setupBackButton()
+        setupGrid()
     }
     
 
@@ -54,7 +56,38 @@ class GameBoardViewController: UIViewController {
         }
         
     }
+    
+    private func setupGrid() {
+        
+        guard let gameBoardSize = gameBoardSize else { return }
+        
+        cardVerticalStackView.translatesAutoresizingMaskIntoConstraints = false
 
+        let (columns, rows) = gameBoardSize
+        var cardNumber = 0
+        
+        for _ in 1...rows {
+            let horizontalStackView = createHorizontalStackView()
+            cardVerticalStackView.addArrangedSubview(horizontalStackView)
+            for _ in 1...columns {
+                let cardDownImage = Card(frame: .zero)
+                cardDownImage.delegate = self
+                cardDownImage.tag = cardNumber
+                horizontalStackView.addArrangedSubview(cardDownImage)
+                cardNumber += 1
+            }
+        }
+    }
+    
+    private func createHorizontalStackView() -> UIStackView {
+        let horizontalStackView = UIStackView()
+        horizontalStackView.axis = .horizontal
+        horizontalStackView.distribution = .fillEqually
+        horizontalStackView.spacing = 10.0
+        horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
+        return horizontalStackView
+    }
+    
     private func presentError() {
         let alert = UIAlertController(title: "Sorry", message: "Something went wrong", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Darn", style: .cancel, handler: nil))
@@ -72,3 +105,10 @@ extension GameBoardViewController: BackArrowTap {
     
 }
 
+extension GameBoardViewController: CardTap {
+    
+    func handleCardTap(sender: UIImageView) {
+        print("Card Tapped with tag: \(sender.tag)")
+    }
+    
+}
