@@ -45,6 +45,7 @@ class LobbyViewController: UIViewController {
         
         pickGameLabel.text = "ui.lobby.pickGameBoard".localized
         pickGameLabel.font = Styles.Font.medium
+        pickGameLabel.textColor = Styles.Color.titleRed
     }
     
     private func setupButtons() {

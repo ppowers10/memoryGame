@@ -27,7 +27,7 @@ class PrimaryButton: UIButton {
             self.setTitle(buttonTitle, for: .normal)
             self.setTitleColor(Styles.Color.buttonTitleWhite, for: .normal)
             setTitleColor(Styles.Color.buttonTitleHighlightedWhite, for: .highlighted)
-            titleLabel?.font = Styles.Font.large
+            titleLabel?.font = Styles.Font.medium
         }
     }
 

@@ -24,14 +24,11 @@ class GameBoardViewController: UIViewController {
     
     // MARK: Variables
     
-    let possibleCards: Set<String> = ["memoryBatCardFront", "memoryCatCardFront", "memoryCowCardFront", "memoryDragonFront", "memoryGarbageManCardFront", "memoryGhostDogCardFront", "memoryHenCardFront", "memoryHorseCardFront", "memoryPigCardFront", "memorySpiderCardFront"]
     let flipTransition: [UIView.AnimationOptions] = [.transitionFlipFromRight, .transitionFlipFromLeft, .transitionFlipFromTop, .transitionFlipFromBottom]
     let backButtonFrame = CGRect(x: 20, y: 20, width: 60, height: 60)
     
     var gameBoardSize: (Int, Int)?
-    var gameCards: [String] = []
-    var firstGuess: Card?
-    var matchesFound = 0
+    var gameLogic: GameLogic? = nil
     
     var randomAnimation: UIView.AnimationOptions {
         return flipTransition.randomElement() ?? .transitionFlipFromRight
@@ -51,7 +48,7 @@ class GameBoardViewController: UIViewController {
         setupLabels()
         setupBackButton()
         setupGrid()
-        generateCards()
+        setupGameLogic()
     }
     
 
@@ -127,52 +124,24 @@ class GameBoardViewController: UIViewController {
     
     // MARK: Game Logic
     
-    private func generateCards() {
-        guard let gameBoardSize = gameBoardSize else { return }
-        let cardPairsNeeded = (gameBoardSize.0 * gameBoardSize.1) / 2
-        var copyPossibleCards = possibleCards
-        for _ in 1...cardPairsNeeded {
-            if let cardImage = copyPossibleCards.randomElement() {
-                gameCards.append(cardImage)
-                gameCards.append(cardImage)
-                copyPossibleCards.remove(cardImage)
-            }
-        }
-        gameCards.shuffle()
-    }
-    
-    private func userGuess(with currentCardGuess: Card) {
-        // First guess needs to exist to continue matching logic
-        guard let firstCardGuess = firstGuess else {
-            firstGuess = currentCardGuess
-            return
-        }
-        
-        if gameCards[firstCardGuess.tag] == gameCards[currentCardGuess.tag] {
-            // celebarte match found
-        } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + K.incorrectDelayTime) {
-                self.incorrectAnimation(with: [firstCardGuess, currentCardGuess])
-            }
-        }
-        
-        firstGuess = nil
-    }
-    
-    private func toggleInteraction(of card: Card) {
-        card.isUserInteractionEnabled = card.isUserInteractionEnabled ? false : true
+    private func setupGameLogic() {
+        gameLogic = GameLogic(with: gameBoardSize)
+        gameLogic?.delegate = self
     }
     
     
-    // MARK: Card Flip Animations
+    
+    
+    // MARK: Animations and Interaction
     
     private func guessAnimation(with card: Card) {
         UIView.transition(with: card, duration: K.flipAnimationDuration, options: randomAnimation, animations: {
-            if let updateImage = UIImage(named: self.gameCards[card.tag]) {
+            if let gameLogic = self.gameLogic,
+                let updateImage = UIImage(named: gameLogic.gameCards[card.tag]) {
                 card.image = updateImage
             }
         }) { (success) in
-            self.userGuess(with: card)
+            self.gameLogic?.userGuess(with: card)
         }
     }
     
@@ -184,8 +153,27 @@ class GameBoardViewController: UIViewController {
             })
         }
     }
+    
+    private func toggleInteraction(of card: Card) {
+        card.isUserInteractionEnabled = card.isUserInteractionEnabled ? false : true
+    }
 
 }
+
+
+extension GameBoardViewController: ReturnGameState {
+    func gameIsOver() {
+        // celebrate
+    }
+    
+    func incorrectSecondGuess(firstGuess: Card, secondGuess: Card) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + K.incorrectDelayTime) {
+            self.incorrectAnimation(with: [firstGuess, secondGuess])
+        }
+    }
+    
+}
+
 
 extension GameBoardViewController: BackArrowTap {
     
@@ -195,6 +183,7 @@ extension GameBoardViewController: BackArrowTap {
     }
     
 }
+
 
 extension GameBoardViewController: CardTap {
     
