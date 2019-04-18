@@ -36,16 +36,14 @@ class LobbyViewController: UIViewController {
     // MARK: UI Setup
     
     private func setupBackground() {
-        let backgroundImageView = UIImageView(image: UIImage(named: "farm_lobby_bg"))
-        backgroundImageView.frame = view.frame
-        backgroundImageView.contentMode = .scaleAspectFill
-        view.addSubview(backgroundImageView)
-        view.sendSubviewToBack(backgroundImageView)
+        setBackground(with: "farm_lobby_bg")
     }
     
     private func setupLabels() {
+        navigationController?.setupNavigationTitleAttributes()
         title = "Memory Game" //Localize string
         pickGameLabel.text = "Pick Your Game Size" //Localize string
+        pickGameLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 38)!
     }
     
     private func setupButtons() {
@@ -64,7 +62,6 @@ class LobbyViewController: UIViewController {
 extension LobbyViewController: PrimaryButtonTap {
     
     func handlePrimaryBUttonTap(sender: UIButton) {
-        print("Button with tag \(sender.tag) tapped")
         
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let gameBoardViewController = storyboard.instantiateViewController(withIdentifier: "GameBoardViewController") as! GameBoardViewController
@@ -72,8 +69,5 @@ extension LobbyViewController: PrimaryButtonTap {
         
         self.navigationController?.pushViewController(gameBoardViewController, animated: true)
         
-//        self.present(gameBoardViewController, animated: true) {
-//            // Any further actions
-//        }
     }
 }

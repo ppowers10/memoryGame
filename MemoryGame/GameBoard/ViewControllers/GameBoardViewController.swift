@@ -10,13 +10,31 @@ import UIKit
 
 class GameBoardViewController: UIViewController {
     
+    // MARK: Constants
+    
+    struct K {
+        static let fadeAnimationDuration = 0.8
+        static let alphaTransparent: CGFloat = 0.0
+        static let alphaOpaque: CGFloat = 1.0
+        static let flipAnimationDuration = 0.3
+        static let incorrectDelayTime = 1.0
+        static let horizontalStackViewSpacing: CGFloat = 10.0
+    }
+    
     // MARK: Variables
     
-    var gameBoardSize: (Int, Int)?
     let possibleCards: Set<String> = ["memoryBatCardFront", "memoryCatCardFront", "memoryCowCardFront", "memoryDragonFront", "memoryGarbageManCardFront", "memoryGhostDogCardFront", "memoryHenCardFront", "memoryHorseCardFront", "memoryPigCardFront", "memorySpiderCardFront"]
+    let flipTransition: [UIView.AnimationOptions] = [.transitionFlipFromRight, .transitionFlipFromLeft, .transitionFlipFromTop, .transitionFlipFromBottom]
+    let backButtonFrame = CGRect(x: 20, y: 20, width: 60, height: 60)
+    
+    var gameBoardSize: (Int, Int)?
     var gameCards: [String] = []
-    var cardOneSelected: Card?
+    var firstGuess: Card?
     var matchesFound = 0
+    
+    var randomAnimation: UIView.AnimationOptions {
+        return flipTransition.randomElement() ?? .transitionFlipFromRight
+    }
     
     // MARK: Outlets
     
@@ -38,11 +56,7 @@ class GameBoardViewController: UIViewController {
     // MARK: UI Setup
     
     private func setupBackground() {
-        let backgroundImageView = UIImageView(image: UIImage(named: "farm_game_bg"))
-        backgroundImageView.frame = view.frame
-        backgroundImageView.contentMode = .scaleAspectFill
-        view.addSubview(backgroundImageView)
-        view.sendSubviewToBack(backgroundImageView)
+        setBackground(with: "farm_game_bg")
     }
     
     private func setupLabels() {
@@ -58,13 +72,14 @@ class GameBoardViewController: UIViewController {
     private func setupBackButton() {
         navigationItem.setHidesBackButton(true, animated:false)
         
-        let backArrowImageView = BackArrow(frame: CGRect(x: 20, y: 20, width: 60, height: 60))
+        let backArrowImageView = BackArrow(frame: backButtonFrame)
         backArrowImageView.delegate = self
-        backArrowImageView.alpha = 0.0
+        backArrowImageView.alpha = K.alphaTransparent
         navigationController?.view.addSubview(backArrowImageView)
         
-        UIView.animate(withDuration: 0.8) {
-            backArrowImageView.alpha = 1.0
+        // Fade Button in to transition better with navigational presentation
+        UIView.animate(withDuration: K.fadeAnimationDuration) {
+            backArrowImageView.alpha = K.alphaOpaque
         }
         
     }
@@ -95,10 +110,13 @@ class GameBoardViewController: UIViewController {
         let horizontalStackView = UIStackView()
         horizontalStackView.axis = .horizontal
         horizontalStackView.distribution = .fillEqually
-        horizontalStackView.spacing = 10.0
+        horizontalStackView.spacing = K.horizontalStackViewSpacing
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         return horizontalStackView
     }
+    
+    
+    // MARK: Error
     
     private func presentError() {
         let alert = UIAlertController(title: "Sorry", message: "Something went wrong", preferredStyle: .alert)
@@ -123,40 +141,50 @@ class GameBoardViewController: UIViewController {
         gameCards.shuffle()
     }
     
-    private func userGuess(with currentCard: Card) {
-        let flipTransition: [UIView.AnimationOptions] = [.transitionFlipFromRight, .transitionFlipFromLeft, .transitionFlipFromTop, .transitionFlipFromBottom]
-        UIView.transition(with: currentCard, duration: 0.3, options: flipTransition.randomElement() ?? .transitionFlipFromRight, animations: {
-            if let updateImage = UIImage(named: self.gameCards[currentCard.tag]) {
-                currentCard.image = updateImage
-            }
-        }) { (success) in
-            currentCard.isUserInteractionEnabled = false
-            
-            guard let firstCardGuess = self.cardOneSelected else {
-                self.cardOneSelected = currentCard
-                return
-            }
-            
-            if self.gameCards[firstCardGuess.tag] == self.gameCards[currentCard.tag] {
-                // celebarte
-                self.cardOneSelected = nil
-            } else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    firstCardGuess.image = UIImage(named: "allCardBacks")
-                    firstCardGuess.isUserInteractionEnabled = true
-                    currentCard.image = UIImage(named: "allCardBacks")
-                    currentCard.isUserInteractionEnabled = true
-                    
-                    
-                }
-            }
-            
-            self.cardOneSelected = nil
+    private func userGuess(with currentCardGuess: Card) {
+        
+        // First guess needs to exist to continue matching logic
+        guard let firstCardGuess = firstGuess else {
+            firstGuess = currentCardGuess
+            return
         }
         
+        if gameCards[firstCardGuess.tag] == gameCards[currentCardGuess.tag] {
+            // celebarte match found
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + K.incorrectDelayTime) {
+                self.incorrectAnimation(with: [firstCardGuess, currentCardGuess])
+            }
+        }
         
+        firstGuess = nil
         
-        
+    }
+    
+    private func toggleInteraction(of card: Card) {
+        card.isUserInteractionEnabled = card.isUserInteractionEnabled ? false : true
+    }
+    
+    
+    // MARK: Card Flip Animations
+    
+    private func guessAnimation(with card: Card) {
+        UIView.transition(with: card, duration: K.flipAnimationDuration, options: randomAnimation, animations: {
+            if let updateImage = UIImage(named: self.gameCards[card.tag]) {
+                card.image = updateImage
+            }
+        }) { (success) in
+            self.userGuess(with: card)
+        }
+    }
+    
+    private func incorrectAnimation(with cards: [Card]) {
+        for card in cards {
+            UIView.transition(with: card, duration: K.flipAnimationDuration, options: randomAnimation, animations: {
+                card.image = UIImage(named: "allCardBacks")
+                self.toggleInteraction(of: card)
+            })
+        }
         
     }
 
@@ -174,7 +202,8 @@ extension GameBoardViewController: BackArrowTap {
 extension GameBoardViewController: CardTap {
     
     func handleCardTap(sender: Card) {
-        userGuess(with: sender)
+        toggleInteraction(of: sender)
+        guessAnimation(with: sender)
     }
     
 }
