@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  MemoryGame
+
+  Created by Patrick Powers on 4/18/19.
+  Copyright © 2019 Powers. All rights reserved.
+*/
+
+"ui.lobby.header" = "Memory Game";
+"ui.lobby.pickGameBoard" = "Pick Your Game Size";
+
+"ui.error.title" = "Sorry";
+"ui.error.message" = "Something went wrong";
+"ui.error.darnButton" =  "Darn";

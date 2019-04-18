@@ -18,7 +18,8 @@ extension UINavigationController {
     
     func setupNavigationTitleAttributes() {
         navigationBar.titleTextAttributes =
-            [NSAttributedString.Key.foregroundColor: UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0),
-             NSAttributedString.Key.font: UIFont(name: "ChalkboardSE-Regular", size: 45)!]
+            [NSAttributedString.Key.foregroundColor: Styles.Color.headerOrange,
+             NSAttributedString.Key.font: Styles.Font.large]
     }
+    
 }

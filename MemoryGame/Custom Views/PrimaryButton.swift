@@ -17,17 +17,17 @@ class PrimaryButton: UIButton {
     // MARK: Variables
     
     var borderWidth: CGFloat = 1.0
-    var borderColor: CGColor = UIColor(red:0.80, green:0.50, blue:0.03, alpha:1.0).cgColor
-    var fillColor: CGColor = UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0).cgColor
+    var borderColor: CGColor = Styles.Color.headerOrange.cgColor
+    var fillColor: CGColor = Styles.Color.buttonFillOrange.cgColor
     var buttonCornerRadius: CGFloat = 10.0
     weak var delegate: PrimaryButtonTap?
     
     var buttonTitle: String? {
         didSet {
             self.setTitle(buttonTitle, for: .normal)
-            self.setTitleColor(UIColor.white, for: .normal)
-            setTitleColor(UIColor.white.withAlphaComponent(0.2), for: .highlighted)
-            titleLabel?.font = UIFont(name: "ChalkboardSE-Regular", size: 30)!
+            self.setTitleColor(Styles.Color.buttonTitleWhite, for: .normal)
+            setTitleColor(Styles.Color.buttonTitleHighlightedWhite, for: .highlighted)
+            titleLabel?.font = Styles.Font.large
         }
     }
 

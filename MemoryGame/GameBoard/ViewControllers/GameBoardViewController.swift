@@ -21,6 +21,7 @@ class GameBoardViewController: UIViewController {
         static let horizontalStackViewSpacing: CGFloat = 10.0
     }
     
+    
     // MARK: Variables
     
     let possibleCards: Set<String> = ["memoryBatCardFront", "memoryCatCardFront", "memoryCowCardFront", "memoryDragonFront", "memoryGarbageManCardFront", "memoryGhostDogCardFront", "memoryHenCardFront", "memoryHorseCardFront", "memoryPigCardFront", "memorySpiderCardFront"]
@@ -35,6 +36,7 @@ class GameBoardViewController: UIViewController {
     var randomAnimation: UIView.AnimationOptions {
         return flipTransition.randomElement() ?? .transitionFlipFromRight
     }
+    
     
     // MARK: Outlets
     
@@ -81,11 +83,9 @@ class GameBoardViewController: UIViewController {
         UIView.animate(withDuration: K.fadeAnimationDuration) {
             backArrowImageView.alpha = K.alphaOpaque
         }
-        
     }
     
     private func setupGrid() {
-        
         guard let gameBoardSize = gameBoardSize else { return }
         
         cardVerticalStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -119,8 +119,8 @@ class GameBoardViewController: UIViewController {
     // MARK: Error
     
     private func presentError() {
-        let alert = UIAlertController(title: "Sorry", message: "Something went wrong", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Darn", style: .cancel, handler: nil))
+        let alert = UIAlertController(title: "ui.error.title".localized, message: "ui.error.message".localized, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ui.error.darnButton".localized, style: .cancel, handler: nil))
         present(alert, animated: true)
     }
     
@@ -142,7 +142,6 @@ class GameBoardViewController: UIViewController {
     }
     
     private func userGuess(with currentCardGuess: Card) {
-        
         // First guess needs to exist to continue matching logic
         guard let firstCardGuess = firstGuess else {
             firstGuess = currentCardGuess
@@ -158,7 +157,6 @@ class GameBoardViewController: UIViewController {
         }
         
         firstGuess = nil
-        
     }
     
     private func toggleInteraction(of card: Card) {
@@ -185,7 +183,6 @@ class GameBoardViewController: UIViewController {
                 self.toggleInteraction(of: card)
             })
         }
-        
     }
 
 }

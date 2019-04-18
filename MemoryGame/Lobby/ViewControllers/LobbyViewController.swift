@@ -41,9 +41,10 @@ class LobbyViewController: UIViewController {
     
     private func setupLabels() {
         navigationController?.setupNavigationTitleAttributes()
-        title = "Memory Game" //Localize string
-        pickGameLabel.text = "Pick Your Game Size" //Localize string
-        pickGameLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 38)!
+        title = "ui.lobby.header".localized
+        
+        pickGameLabel.text = "ui.lobby.pickGameBoard".localized
+        pickGameLabel.font = Styles.Font.medium
     }
     
     private func setupButtons() {
@@ -62,12 +63,11 @@ class LobbyViewController: UIViewController {
 extension LobbyViewController: PrimaryButtonTap {
     
     func handlePrimaryBUttonTap(sender: UIButton) {
-        
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let gameBoardViewController = storyboard.instantiateViewController(withIdentifier: "GameBoardViewController") as! GameBoardViewController
         gameBoardViewController.gameBoardSize = gameOptions[sender.tag]
         
         self.navigationController?.pushViewController(gameBoardViewController, animated: true)
-        
     }
+    
 }
