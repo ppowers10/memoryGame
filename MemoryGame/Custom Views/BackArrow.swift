@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BackArrowTap {
+protocol BackArrowTap: class {
     func handleBackArrowTap(sender: UIImageView)
 }
 
@@ -17,7 +17,7 @@ class BackArrow: UIImageView {
     // MARK: Variables
     
     var arrowImage = UIImage(named: "backNavButton")
-    var delegate: BackArrowTap?
+    weak var delegate: BackArrowTap?
     
     
     // MARK: Init

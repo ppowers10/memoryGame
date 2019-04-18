@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PrimaryButtonTap {
+protocol PrimaryButtonTap: class {
     func handlePrimaryBUttonTap(sender: UIButton)
 }
 
@@ -19,7 +19,7 @@ class PrimaryButton: UIButton {
     var borderWidth: CGFloat = 1.0
     var borderColor: CGColor = UIColor.black.cgColor
     var buttonCornerRadius: CGFloat = 10.0
-    var delegate: PrimaryButtonTap?
+    weak var delegate: PrimaryButtonTap?
     
     var buttonTitle: String? {
         didSet {

@@ -27,12 +27,21 @@ class LobbyViewController: UIViewController {
         super.viewDidLoad()
  
         navigationController?.setupClearNavigationBar()
+        setupBackground()
         setupLabels()
         setupButtons()
     }
     
     
     // MARK: UI Setup
+    
+    private func setupBackground() {
+        let backgroundImageView = UIImageView(image: UIImage(named: "farm_lobby_bg"))
+        backgroundImageView.frame = view.frame
+        backgroundImageView.contentMode = .scaleAspectFill
+        view.addSubview(backgroundImageView)
+        view.sendSubviewToBack(backgroundImageView)
+    }
     
     private func setupLabels() {
         title = "Memory Game" //Localize string

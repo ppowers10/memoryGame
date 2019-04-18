@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol CardTap {
-    func handleCardTap(sender: UIImageView)
+protocol CardTap: class {
+    func handleCardTap(sender: Card)
 }
 
 class Card: UIImageView {
@@ -17,7 +17,7 @@ class Card: UIImageView {
     // MARK: Variables
     
     var cardBackImage = UIImage(named: "allCardBacks")
-    var delegate: CardTap?
+    weak var delegate: CardTap?
     
     
     // MARK: Init

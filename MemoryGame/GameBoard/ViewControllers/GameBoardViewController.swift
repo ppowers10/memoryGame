@@ -13,9 +13,10 @@ class GameBoardViewController: UIViewController {
     // MARK: Variables
     
     var gameBoardSize: (Int, Int)?
-    var cardTypeArray: [String] = []
     let possibleCards: Set<String> = ["memoryBatCardFront", "memoryCatCardFront", "memoryCowCardFront", "memoryDragonFront", "memoryGarbageManCardFront", "memoryGhostDogCardFront", "memoryHenCardFront", "memoryHorseCardFront", "memoryPigCardFront", "memorySpiderCardFront"]
     var gameCards: [String] = []
+    var cardOneSelected: Card?
+    var matchesFound = 0
     
     // MARK: Outlets
     
@@ -26,6 +27,7 @@ class GameBoardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackground()
         setupLabels()
         setupBackButton()
         setupGrid()
@@ -34,6 +36,14 @@ class GameBoardViewController: UIViewController {
     
 
     // MARK: UI Setup
+    
+    private func setupBackground() {
+        let backgroundImageView = UIImageView(image: UIImage(named: "farm_game_bg"))
+        backgroundImageView.frame = view.frame
+        backgroundImageView.contentMode = .scaleAspectFill
+        view.addSubview(backgroundImageView)
+        view.sendSubviewToBack(backgroundImageView)
+    }
     
     private func setupLabels() {
         guard let gameBoardSize = gameBoardSize else {
@@ -112,6 +122,43 @@ class GameBoardViewController: UIViewController {
         }
         gameCards.shuffle()
     }
+    
+    private func userGuess(with currentCard: Card) {
+        let flipTransition: [UIView.AnimationOptions] = [.transitionFlipFromRight, .transitionFlipFromLeft, .transitionFlipFromTop, .transitionFlipFromBottom]
+        UIView.transition(with: currentCard, duration: 0.3, options: flipTransition.randomElement() ?? .transitionFlipFromRight, animations: {
+            if let updateImage = UIImage(named: self.gameCards[currentCard.tag]) {
+                currentCard.image = updateImage
+            }
+        }) { (success) in
+            currentCard.isUserInteractionEnabled = false
+            
+            guard let firstCardGuess = self.cardOneSelected else {
+                self.cardOneSelected = currentCard
+                return
+            }
+            
+            if self.gameCards[firstCardGuess.tag] == self.gameCards[currentCard.tag] {
+                // celebarte
+                self.cardOneSelected = nil
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    firstCardGuess.image = UIImage(named: "allCardBacks")
+                    firstCardGuess.isUserInteractionEnabled = true
+                    currentCard.image = UIImage(named: "allCardBacks")
+                    currentCard.isUserInteractionEnabled = true
+                    
+                    
+                }
+            }
+            
+            self.cardOneSelected = nil
+        }
+        
+        
+        
+        
+        
+    }
 
 }
 
@@ -126,8 +173,8 @@ extension GameBoardViewController: BackArrowTap {
 
 extension GameBoardViewController: CardTap {
     
-    func handleCardTap(sender: UIImageView) {
-        print("Card Tapped with tag: \(sender.tag)")
+    func handleCardTap(sender: Card) {
+        userGuess(with: sender)
     }
     
 }
