@@ -32,10 +32,6 @@ class Card: UIImageView {
         setup()
     }
     
-    override func layoutSubviews() {
-        setup()
-    }
-    
     
     // MARK: UI Setup
     
@@ -49,7 +45,6 @@ class Card: UIImageView {
         addGestureRecognizer(cardImage)
         
         contentMode = .scaleAspectFit
-        
     }
     
     

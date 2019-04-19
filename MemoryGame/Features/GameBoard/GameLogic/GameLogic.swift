@@ -10,7 +10,7 @@ import Foundation
 
 protocol ReturnGameState: class {
     func gameIsOver()
-    func incorrectSecondGuess(firstGuess: Card, secondGuess: Card)
+    func secondGuessResults(isCorrect: Bool, firstGuess: Card, secondGuess: Card)
 }
 
 class GameLogic {
@@ -66,9 +66,12 @@ class GameLogic {
             if matchesFound == gameCards.count / 2 {
                 // Game Over
                 delegate?.gameIsOver()
+            } else {
+                // Correct Match
+                 delegate?.secondGuessResults(isCorrect: true, firstGuess: firstCardGuess, secondGuess: currentCardGuess)
             }
         } else {
-            delegate?.incorrectSecondGuess(firstGuess: firstCardGuess, secondGuess: currentCardGuess)
+            delegate?.secondGuessResults(isCorrect: false, firstGuess: firstCardGuess, secondGuess: currentCardGuess)
         }
         
         firstGuess = nil

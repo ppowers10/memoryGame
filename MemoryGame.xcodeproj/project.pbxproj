@@ -22,6 +22,7 @@
 		C0828854226903A2000D3972 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0828856226903A2000D3972 /* Localizable.strings */; };
 		C082885822690582000D3972 /* String+NSLocalizedStringShort.swift in Sources */ = {isa = PBXBuildFile; fileRef = C082885722690582000D3972 /* String+NSLocalizedStringShort.swift */; };
 		C082885B226907F6000D3972 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C082885A226907F6000D3972 /* GameLogic.swift */; };
+		C082885E226950B0000D3972 /* AnswerStatusImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C082885D226950B0000D3972 /* AnswerStatusImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		C0828855226903A2000D3972 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C082885722690582000D3972 /* String+NSLocalizedStringShort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+NSLocalizedStringShort.swift"; sourceTree = "<group>"; };
 		C082885A226907F6000D3972 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
+		C082885D226950B0000D3972 /* AnswerStatusImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerStatusImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				C00841C8226683E9005F392C /* PrimaryButton.swift */,
 				C08288452266D21C000D3972 /* BackArrow.swift */,
 				C08288472267F958000D3972 /* Card.swift */,
+				C082885D226950B0000D3972 /* AnswerStatusImageView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				C00841C9226683E9005F392C /* PrimaryButton.swift in Sources */,
 				C082885822690582000D3972 /* String+NSLocalizedStringShort.swift in Sources */,
 				C082884F22688C72000D3972 /* UIViewController+Background.swift in Sources */,
+				C082885E226950B0000D3972 /* AnswerStatusImageView.swift in Sources */,
 				C00841D22266BBE9005F392C /* GameBoardViewController.swift in Sources */,
 				C00841B622667C21005F392C /* AppDelegate.swift in Sources */,
 				C00841CB226687CB005F392C /* LobbyViewController.swift in Sources */,

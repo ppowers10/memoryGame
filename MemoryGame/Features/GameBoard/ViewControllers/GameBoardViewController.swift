@@ -26,6 +26,7 @@ class GameBoardViewController: UIViewController {
     
     let flipTransition: [UIView.AnimationOptions] = [.transitionFlipFromRight, .transitionFlipFromLeft, .transitionFlipFromTop, .transitionFlipFromBottom]
     let backButtonFrame = CGRect(x: 20, y: 20, width: 60, height: 60)
+    let answerStatusFrame = CGRect(x: 0, y: 0, width: 300, height: 300)
     
     var gameBoardSize: (Int, Int)?
     var gameLogic: GameLogic? = nil
@@ -162,13 +163,35 @@ class GameBoardViewController: UIViewController {
 
 
 extension GameBoardViewController: ReturnGameState {
-    func gameIsOver() {
-        // celebrate
+    func secondGuessResults(isCorrect: Bool, firstGuess: Card, secondGuess: Card) {
+        if isCorrect {
+            let correctView = AnswerStatusImageView(frame: answerStatusFrame, isCorrect: true)
+            correctView.center = view.center
+            self.view.addSubview(correctView)
+            DispatchQueue.main.asyncAfter(deadline: .now() + K.incorrectDelayTime) {
+                correctView.removeFromSuperview()
+            }
+        } else {
+            let incorrectView = AnswerStatusImageView(frame: answerStatusFrame, isCorrect: false)
+            incorrectView.center = view.center
+            self.view.addSubview(incorrectView)
+            DispatchQueue.main.asyncAfter(deadline: .now() + K.incorrectDelayTime) {
+                incorrectView.removeFromSuperview()
+                self.incorrectAnimation(with: [firstGuess, secondGuess])
+            }
+        }
     }
     
-    func incorrectSecondGuess(firstGuess: Card, secondGuess: Card) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + K.incorrectDelayTime) {
-            self.incorrectAnimation(with: [firstGuess, secondGuess])
+    func gameIsOver() {
+        for _ in 1...10 {
+            let correctView = AnswerStatusImageView(frame: answerStatusFrame, isCorrect: true)
+            correctView.center = view.center
+            self.view.addSubview(correctView)
+            
+            UIView.animate(withDuration: 0.6, delay: 0, options: [.repeat, .autoreverse, .beginFromCurrentState], animations: {
+                correctView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            }, completion: nil)
+            
         }
     }
     

@@ -44,10 +44,6 @@ class PrimaryButton: UIButton {
         setup()
     }
 
-    override func layoutSubviews() {
-        setup()
-    }
-
     
     // MARK: UI Setup
     

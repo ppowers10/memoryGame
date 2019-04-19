@@ -32,10 +32,6 @@ class BackArrow: UIImageView {
         setup()
     }
     
-    override func layoutSubviews() {
-        setup()
-    }
-    
     
     // MARK: UI Setup
     
@@ -47,7 +43,6 @@ class BackArrow: UIImageView {
         let backTap = UITapGestureRecognizer(target: self, action: #selector(arrowTap))
         isUserInteractionEnabled = true
         addGestureRecognizer(backTap)
-        
     }
     
     
