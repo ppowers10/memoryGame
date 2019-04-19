@@ -91,10 +91,13 @@ class GameBoardViewController: UIViewController {
         let (columns, rows) = gameBoardSize
         var cardNumber = 0
         
-        for _ in 1...rows {
+        for rowIndex in 1...rows {
             let horizontalStackView = createHorizontalStackView()
             cardVerticalStackView.addArrangedSubview(horizontalStackView)
-            for _ in 1...columns {
+            for columnIndex in 1...columns {
+                // Prevent a grid from being built that has an odd number
+                if rowIndex == rows && columnIndex == columns && cardNumber % 2 == 0 { break }
+                
                 let cardDownImage = Card(frame: .zero)
                 cardDownImage.delegate = self
                 cardDownImage.tag = cardNumber

@@ -23,7 +23,18 @@
 		C082885822690582000D3972 /* String+NSLocalizedStringShort.swift in Sources */ = {isa = PBXBuildFile; fileRef = C082885722690582000D3972 /* String+NSLocalizedStringShort.swift */; };
 		C082885B226907F6000D3972 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C082885A226907F6000D3972 /* GameLogic.swift */; };
 		C082885E226950B0000D3972 /* AnswerStatusImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C082885D226950B0000D3972 /* AnswerStatusImageView.swift */; };
+		C082886622695BD4000D3972 /* GameLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C082886522695BD4000D3972 /* GameLogicTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C082886822695BD4000D3972 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C00841AA22667C21005F392C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C00841B122667C21005F392C;
+			remoteInfo = MemoryGame;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		C00841B222667C21005F392C /* MemoryGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,10 +55,20 @@
 		C082885722690582000D3972 /* String+NSLocalizedStringShort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+NSLocalizedStringShort.swift"; sourceTree = "<group>"; };
 		C082885A226907F6000D3972 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		C082885D226950B0000D3972 /* AnswerStatusImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerStatusImageView.swift; sourceTree = "<group>"; };
+		C082886322695BD4000D3972 /* MemoryGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoryGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C082886522695BD4000D3972 /* GameLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogicTests.swift; sourceTree = "<group>"; };
+		C082886722695BD4000D3972 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		C00841AF22667C21005F392C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C082886022695BD4000D3972 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -61,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				C00841B422667C21005F392C /* MemoryGame */,
+				C082886422695BD4000D3972 /* MemoryGameTests */,
 				C00841B322667C21005F392C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				C00841B222667C21005F392C /* MemoryGame.app */,
+				C082886322695BD4000D3972 /* MemoryGameTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,6 +192,15 @@
 			path = Features;
 			sourceTree = "<group>";
 		};
+		C082886422695BD4000D3972 /* MemoryGameTests */ = {
+			isa = PBXGroup;
+			children = (
+				C082886522695BD4000D3972 /* GameLogicTests.swift */,
+				C082886722695BD4000D3972 /* Info.plist */,
+			);
+			path = MemoryGameTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -189,6 +221,24 @@
 			productReference = C00841B222667C21005F392C /* MemoryGame.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C082886222695BD4000D3972 /* MemoryGameTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C082886A22695BD4000D3972 /* Build configuration list for PBXNativeTarget "MemoryGameTests" */;
+			buildPhases = (
+				C082885F22695BD4000D3972 /* Sources */,
+				C082886022695BD4000D3972 /* Frameworks */,
+				C082886122695BD4000D3972 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C082886922695BD4000D3972 /* PBXTargetDependency */,
+			);
+			name = MemoryGameTests;
+			productName = MemoryGameTests;
+			productReference = C082886322695BD4000D3972 /* MemoryGameTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -201,6 +251,10 @@
 				TargetAttributes = {
 					C00841B122667C21005F392C = {
 						CreatedOnToolsVersion = 10.1;
+					};
+					C082886222695BD4000D3972 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = C00841B122667C21005F392C;
 					};
 				};
 			};
@@ -218,6 +272,7 @@
 			projectRoot = "";
 			targets = (
 				C00841B122667C21005F392C /* MemoryGame */,
+				C082886222695BD4000D3972 /* MemoryGameTests */,
 			);
 		};
 /* End PBXProject section */
@@ -231,6 +286,13 @@
 				C0828854226903A2000D3972 /* Localizable.strings in Resources */,
 				C00841BD22667C22005F392C /* Assets.xcassets in Resources */,
 				C00841BB22667C21005F392C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C082886122695BD4000D3972 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +318,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C082885F22695BD4000D3972 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C082886622695BD4000D3972 /* GameLogicTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C082886922695BD4000D3972 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C00841B122667C21005F392C /* MemoryGame */;
+			targetProxy = C082886822695BD4000D3972 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C00841B922667C21005F392C /* Main.storyboard */ = {
@@ -440,6 +518,44 @@
 			};
 			name = Release;
 		};
+		C082886B22695BD4000D3972 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MemoryGameTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.powers.MemoryGameTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MemoryGame.app/MemoryGame";
+			};
+			name = Debug;
+		};
+		C082886C22695BD4000D3972 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MemoryGameTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.powers.MemoryGameTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MemoryGame.app/MemoryGame";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -457,6 +573,15 @@
 			buildConfigurations = (
 				C00841C522667C22005F392C /* Debug */,
 				C00841C622667C22005F392C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C082886A22695BD4000D3972 /* Build configuration list for PBXNativeTarget "MemoryGameTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C082886B22695BD4000D3972 /* Debug */,
+				C082886C22695BD4000D3972 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

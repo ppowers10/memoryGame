@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="cxD-Qp-qpk">
-                                <rect key="frame" x="67" y="100" width="200" height="183"/>
+                                <rect key="frame" x="67" y="105" width="200" height="178"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="7fV-oc-pdv"/>
                                 </constraints>
@@ -33,9 +33,9 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="cxD-Qp-qpk" firstAttribute="top" secondItem="yy2-hn-jyf" secondAttribute="bottom" constant="15" id="5oD-6A-P5B"/>
+                            <constraint firstItem="yy2-hn-jyf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="64.5" id="5fl-bx-vY6"/>
+                            <constraint firstItem="cxD-Qp-qpk" firstAttribute="top" secondItem="yy2-hn-jyf" secondAttribute="bottom" constant="20" id="5oD-6A-P5B"/>
                             <constraint firstItem="yy2-hn-jyf" firstAttribute="centerX" secondItem="cxD-Qp-qpk" secondAttribute="centerX" id="DXE-ro-7tR"/>
-                            <constraint firstItem="cxD-Qp-qpk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="YXF-Ik-OEz"/>
                             <constraint firstItem="cxD-Qp-qpk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" multiplier="0.5" id="ez8-pu-gJ7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cxD-Qp-qpk" secondAttribute="bottom" constant="60" id="ohB-tw-KZe"/>
                         </constraints>
